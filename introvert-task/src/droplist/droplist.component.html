@@ -1,0 +1,22 @@
+<section class="droplist">
+    <div class="droplist-element">
+        <input type="checkbox" />
+        <p>{{ selection }}</p>
+    </div>
+    @for (item of dataList; track item.id) {
+        <div class="droplist-union">
+            <div class="droplist-element" (click)="showSubList(item.id)">
+                <input type="checkbox" (change)="saveChanges(item.id)"/>
+                <p>{{ item.nameElement }}</p>
+            </div>
+            @if ( item.isOpen) {
+                @for (subitem of dataSubList; track $index) {
+                    <div class="droplist-element join-element">
+                        <input type="checkbox" (change)="saveChanges(item.id, $index)"/>
+                        <p>{{ subitem }}</p>
+                    </div>
+                }
+            }
+        </div>
+    }
+</section>
